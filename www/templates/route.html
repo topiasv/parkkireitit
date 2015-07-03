@@ -1,0 +1,36 @@
+<ion-view view-title="Route">
+    <ion-nav-buttons side="secondary">
+      <button class="button button-icon" ng-click="addRoute()">
+        <i class="icon ion-plus"></i>
+      </button>
+    </ion-nav-buttons>
+	<ion-content>
+		<div class="row row-center">
+			<div class="col col-center">
+				<!-- <div class="text-center">
+					<button class="button button-icon" ng-click="toggleVia()">
+						<i class="icon ion-plus"></i>
+					</button>
+				</div> -->
+			</div>
+			<div class="col col-75">
+				<div class="list list-inset">
+					<form>
+						<label class="item item-input">
+							<input type="text" placeholder="From" ng-model="from"></input>
+						</label>
+						<label class="item item-input">
+							<input type="text" placeholder="To" ng-model="to"></input>
+						</label>
+					</form>
+				</div>
+			</div>
+			<div class="col">
+				<div class="text-center">
+					<button class="button button-icon icon ion-shuffle small" ng-click="toggleVia()">
+					</button>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

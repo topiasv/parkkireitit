@@ -1,0 +1,16 @@
+<ion-view view-title="Favorites">
+    <ion-nav-buttons side="secondary">
+      <button class="button button-icon" ng-click="addRoute()">
+        <i class="icon ion-plus"></i>
+      </button>
+    </ion-nav-buttons>
+	<ion-content>
+		<div class="list card">
+			<a href="#/app/favorites/{{favorite.id}}" class="item item-icon-left" ng-repeat="favorite in favoriteRoutes">
+				<i class="icon ion-ios-star"></i>
+				<h2>{{favorite.from}} - {{favorite.to}}</h2>
+				<p>{{favorite.via}}</p>
+			</a>
+		</div>
+	</ion-content>
+</ion-view>

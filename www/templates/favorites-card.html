@@ -1,0 +1,7 @@
+<div class="list card" ng-controller="FavoritesCardCtrl">
+	<a href="#/app/favorites/{{favorite.id}}"" class="item item-icon-left" ng-repeat="favorite in favorites">
+		<i class="icon {{favorite.icon}}"></i>
+		<h2>{{favorite.title}}</h2>
+		<p>{{favorite.subtitle}}</p>
+	</a>
+</div>
