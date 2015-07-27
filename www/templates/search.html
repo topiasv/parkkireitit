@@ -2,21 +2,21 @@
 	<div class="bar bar-header item-input-inset">
 		<label class="item-input-wrapper">
 			<i class="icon ion-ios-search placeholder-icon"></i>
-			<input type="search" placeholder="Search" ng-model="filter">
+			<input id="searchInputBox" type="text" placeholder="{{searchPlaceHolder}}" ng-model="searchInput" ng-submit="callback(searchInput)">
 		</label>
 		<button class="button button-clear" ng-click="closeModal()">
 			Cancel
 		</button>
 	</div>
-	<div class="list card" ng-hide="filter">
-		<a class="item item-icon-left" ng-repeat="favorite in favoritePlaces" ng-click="navigateTo(favorite.name)">
+	<div class="list card" ng-hide="searchInput">
+		<a class="item item-icon-left" ng-repeat="favorite in favoritePlaces" ng-click="callback(favorite.name)">
 			<i class="icon ion-ios-star"></i>
 			<h2>{{favorite.name}}</h2>
 			<p>{{favorite.commune}}</p>
 		</a>
 	</div>
-	<div class="list card" ng-hide="!filter">
-		<a class="item item-icon-left" ng-repeat="place in places | filter:filter" ng-click="navigateTo(place.name)">
+	<div class="list card" ng-hide="!searchInput">
+		<a class="item item-icon-left" ng-repeat="place in places | filter:searchInput" ng-click="callback(place.name)">
 			<i class="icon ion-ios-location"></i>
 			<h2>{{place.name}}</h2>
 			<p>{{place.commune}}</p>

@@ -1,21 +1,58 @@
 <ion-view view-title="Home">
     <ion-nav-buttons side="secondary">
-      <button class="button button-icon" ng-click="openModal()">
-        <i class="icon ion-search"></i>
+      <button class="button button-icon" ng-click="applyFrom(); applyTo()">
+        <i class="icon ion-close"></i>
       </button>
     </ion-nav-buttons>
 	<ion-content>
-		<!-- <div class="list list-inset">
-		  <label class="item item-input">
-			<i class="icon ion-search placeholder-icon"></i>
-			<input type="text" placeholder="Search">
-		  </label>
-		</div> -->
 		<div class="list card">
-			<a href="#/app/favorites/{{favorite.id}}"" class="item item-icon-left" ng-repeat="favorite in favoriteRoutes">
+			<div class="item row">
+				<div class="col col-10 col-center">
+					<a href="" class="button button-clear button-dark icon-left ion-plus" ng-click="toggleVia()">
+						<!-- <i class="icon ion-plus small"></i> -->
+					</a>
+				</div>
+				<div class="col col-75 col-center">
+					<form>
+						<label class="item item-input" ng-click="openModal('Choose a starting point', applyFrom)">
+							<span ng-hide="from">From</span>{{from}}
+						</label>
+						<label class="item item-input" ng-click="openModal('Choose an ending point', applyTo)">
+							<span ng-hide="to">To</span>{{to}}
+						</label>
+					</form>
+				</div>
+				<div class="col col-10 col-center">
+					<a href="" class="button button-clear button-dark icon-left ion-shuffle" ng-click="swapFromTo()">
+						<!-- <i class="icon ion-shuffle small"></i> -->
+					</a>
+				</div>
+			</div>
+			<div>
+				<a href="" class="align-left button button-clear button-dark icon-left ion-calendar" ng-model="date">24.7.2015 16:29</a>
+				<a href="" class="align-right button button-clear button-dark icon-left ion-android-options" ng-model="date"></a>
+			</div>
+		</div>
+		
+		<div class="list card" ng-hide="from && to">
+			<a href="" class="item item-icon-left" ng-repeat="favorite in favoriteRoutes" ng-click="applyFrom(favorite.from); applyTo(favorite.to)">
 				<i class="icon ion-ios-star"></i>
 				<h2>{{favorite.from}} - {{favorite.to}}</h2>
 				<p>{{favorite.via}}</p>
+			</a>
+		</div>
+		<div class="list card" ng-show="from && to">
+			<a href="#/app/home/details/{{route.id}}" class="item" ng-repeat="route in routes">
+				<div class="row">
+					<div class="col">
+						<i class="icon {{transformIcon(details.transport)}} larger padding-right"  ng-repeat="details in route.route">
+							<span class="small">{{details.details}}</span>
+						</i>
+						<h2>{{route.start.h}}:{{route.start.m}} - {{route.end.h}}:{{route.end.m}}</h2>
+						<p>via {{route.via}}</p>
+					</div>
+					<h2 class="col-center">{{route.duration.h}}:{{route.duration.m}}</h2>
+				</div>
 			</a>
 		</div>
 	</ion-content>

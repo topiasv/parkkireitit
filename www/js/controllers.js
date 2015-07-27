@@ -10,13 +10,17 @@ angular.module('starter.controllers', [])
 	//});
 })
 
-.controller('HomeCtrl', function($scope, $state, $ionicModal, favoriteRoutes, favoritePlaces, places, setFrom, setTo, setVia) {
+.controller('HomeCtrl', function($scope, $state, $ionicModal, favoriteRoutes, favoritePlaces, places, setFrom, setTo, setVia, getFrom, getVia, getTo, routes, transformIcon) {
 	$scope.favoriteRoutes = favoriteRoutes;
 	$scope.favoritePlaces = favoritePlaces;
 	$scope.places = places;
 	$scope.setFrom = setFrom;
 	$scope.setTo = setTo;
 	$scope.setVia = setVia;
+	$scope.from = getFrom();
+	$scope.via = getVia();
+	$scope.to = getTo();
+	$scope.routes = routes;
 	
 	$ionicModal.fromTemplateUrl('templates/search.html', {
 		scope: $scope,
@@ -25,12 +29,16 @@ angular.module('starter.controllers', [])
 		$scope.modal = modal;
 	});
 	
-	$scope.openModal = function() {
+	$scope.openModal = function(placeHolder, callback) {
 		$scope.modal.show();
+		$scope.searchPlaceHolder = placeHolder;
+		$scope.callback = callback;
+		// document.getElementById("searchInputBox").focus();
 	};
 	
 	$scope.closeModal = function() {
 		$scope.modal.hide();
+		$scope.searchInput = '';
 	};
 	
 	//Cleanup the modal when we're done with it!
@@ -47,12 +55,21 @@ angular.module('starter.controllers', [])
 	$scope.$on('modal.removed', function() {
 		// Execute action
 	});
-		
-	$scope.navigateTo = function(to) {
+	
+	$scope.applyTo = function(to) {
 		$scope.setTo(to);
 		$scope.closeModal();
-		$state.go('app.route');
+		$scope.to = getTo();
 	};
+	
+	$scope.applyFrom = function(from) {
+		$scope.setFrom(from);
+		$scope.closeModal();
+		$scope.from = getFrom();
+	};
+	
+	
+	$scope.transformIcon = transformIcon;
 })
 
 .controller('FavoritesCtrl', function($scope, favoriteRoutes, favoritePlaces, addRoute, addPlace) {
@@ -62,11 +79,7 @@ angular.module('starter.controllers', [])
 	$scope.addPlace = addPlace;
 })
 
-.controller('RouteCtrl', function($scope, from, to, via, setFrom, setTo, setVia) {
-	$scope.from = from;
-	$scope.to = to;
-	$scope.via = via;
-	$scope.setFrom = setFrom;
-	$scope.setTo = setTo;
-	$scope.setVia = setVia;
+.controller('DetailsCtrl', function($scope, $stateParams, getRoute) {
+	$scope.getRoute = getRoute;
+	$scope.route = getRoute($stateParams.routeId);
 })

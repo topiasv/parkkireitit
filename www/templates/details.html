@@ -1,0 +1,22 @@
+<ion-view view-title="Details">
+    <ion-nav-buttons side="secondary">
+      <button class="button button-icon" ng-click="addRoute()">
+        <i class="icon ion-star"></i>
+      </button>
+    </ion-nav-buttons>
+	<ion-content>
+		<div class="list">
+			<div ng-repeat="details in route.route">
+				<div>
+					{{details.start}}
+				</div>
+				<div class="item">
+					{{details.duration.m}} min
+				</div>
+			</div>
+			<div>
+				{{route.route[route.route.length - 1].end}}
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

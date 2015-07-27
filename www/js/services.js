@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.service('RouteService', function(){
+.service('QueryService', function(){
 	var _from;
 	var _to;
 	var _via;
@@ -18,11 +18,123 @@ angular.module('starter.services', [])
 		getFrom: function() {
 			return _from;
 		},
-		getTo: function(to) {
+		getTo: function() {
 			return _to;
 		},
-		getVia: function(via) {
+		getVia: function() {
 			return _via;
+		},
+		updateFrom: function(from) {
+			getFrom(from);
+			return _from;
+		},
+		updateTo: function(to) {
+			getTo(to);
+			return _to;
+		},
+		updateVia: function(via) {
+			getVia(via);
+			return _via;
+		}
+	}
+})
+
+.service('RouteService', function(){
+	var routes = [
+		{
+			id: 0,
+			from: "Siuntio",
+			via: "Kirkkonummen asema",
+			to: "Tammasaarenkatu",
+			start: {
+				h: 6,
+				m: 30
+			},
+			end: {
+				h: 7,
+				m: 52
+			},
+			duration: {
+				h: 1,
+				m: 22
+			},
+			price: 0,
+			places: 6,
+			maxPlaces: 50,
+			route: [
+				{
+					start: "Siuntio",
+					transport: "car",
+					distance: 19.1,
+					duration: {
+						h: 0,
+						m: 22
+					},
+					end: "Kirkkonummen asema"
+				},
+				{
+					start: "Kirkkonummen asema",
+					transport: "parking",
+					details: "6/50",
+					distance: 0,
+					duration: {
+						h: 0,
+						m: 5
+					},
+					end: "Kirkkonummen asema"
+				},
+				{
+					start: "Kirkkonummen asema",
+					transport: "walk",
+					distance: 0.2,
+					duration: {
+						h: 0,
+						m: 6
+					},
+					end: "Kirkkonummen asema, laituri 4"
+				},
+				{
+					start: "Kirkkonummen asema, laituri 4",
+					transport: "bus",
+					details: "174",
+					distance: 19.1,
+					duration: {
+						h: 0,
+						m: 38
+					},
+					end: "Länsiväylä"
+				},
+				{
+					start: "Länsiväylä",
+					transport: "walk",
+					distance: 0.7,
+					duration: {
+						h: 0,
+						m: 10
+					},
+					end: "Tammasaarenkatu"
+				}
+			]
+		}
+	];
+	
+	return {
+		getRoutes: function() {
+			return routes;
+		},
+		getRoute: function(id) {
+			return routes[id];
+		},
+		transformIcon: function(source) {
+			if (source === 'car') {
+				return 'ion-android-car';
+			} else if (source === 'bus') {
+				return 'ion-android-bus';
+			} else if (source === 'parking') {
+				return 'ion-social-hackernews-outline';
+			} else if (source === 'walk') {
+				return 'ion-android-walk';
+			}
 		}
 	}
 })

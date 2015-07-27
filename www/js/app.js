@@ -48,44 +48,44 @@ angular.module('starter', ['ionic', 'ionic.utils', 'starter.controllers', 'start
 			places: function(PlacesService) {
 				return PlacesService.getPlaces();
 			},
-			setFrom: function(RouteService) {
-				return RouteService.setFrom;
+			setFrom: function(QueryService) {
+				return QueryService.setFrom;
 			},
-			setTo: function(RouteService) {
-				return RouteService.setTo;
+			setTo: function(QueryService) {
+				return QueryService.setTo;
 			},
-			setVia: function(RouteService) {
-				return RouteService.setVia;
+			setVia: function(QueryService) {
+				return QueryService.setVia;
+			},
+			getFrom: function(QueryService) {
+				return QueryService.getFrom;
+			},
+			getTo: function(QueryService) {
+				return QueryService.getTo;
+			},
+			getVia: function(QueryService) {
+				return QueryService.getVia;
+			},
+			routes: function(RouteService) {
+				return RouteService.getRoutes();
+			},
+			transformIcon: function(RouteService) {
+				return RouteService.transformIcon;
 			}
 		}
 	})
 
-	.state('app.route', {
-		url: "/home/route",
+	.state('app.details', {
+		url: "/home/details/:routeId",
 		views: {
 			'menuContent': {
-				templateUrl: "templates/route.html",
-				controller: 'RouteCtrl'
+				templateUrl: "templates/details.html",
+				controller: 'DetailsCtrl'
 			}
 		},
 		resolve: {
-			from: function(RouteService) {
-				return RouteService.getFrom();
-			},
-			to: function(RouteService) {
-				return RouteService.getTo();
-			},
-			via: function(RouteService) {
-				return RouteService.getVia();
-			},
-			setFrom: function(RouteService) {
-				return RouteService.setFrom;
-			},
-			setTo: function(RouteService) {
-				return RouteService.setTo;
-			},
-			setVia: function(RouteService) {
-				return RouteService.setVia;
+			getRoute: function(RouteService) {
+				return RouteService.getRoute;
 			}
 		}
 	})

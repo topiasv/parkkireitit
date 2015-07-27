@@ -1,3 +1,38 @@
+i.small.ion-plus:before {
+	font-size: 25px;
+}
+
+i.small.ion-shuffle:before {
+	font-size: 25px;
+}
+
+.larger {
+	font-size: larger;
+}
+
 .small {
-	font-size: 10px;
+	font-size: small;
+}
+
+.v-align-middle {
+	vertical-align: middle;
+}
+
+.align-left{
+	float: left
+	text-align: left;
+}
+
+.align-center{
+	float: center
+	text-align: center;
+}
+
+.width-80 {
+	width: 80%
+}
+
+.align-right {
+	float: right;
+	text-align: right;
 }
