@@ -68,24 +68,16 @@ angular.module('starter', ['ionic', 'ionic.utils', 'starter.controllers', 'start
 			},
 			routes: function(RouteService) {
 				return RouteService.getRoutes();
-			},
-			transformIcon: function(RouteService) {
-				return RouteService.transformIcon;
 			}
 		}
 	})
 
 	.state('app.details', {
-		url: "/home/details/:routeId",
+		url: "/home/details/:route",
 		views: {
 			'menuContent': {
 				templateUrl: "templates/details.html",
 				controller: 'DetailsCtrl'
-			}
-		},
-		resolve: {
-			getRoute: function(RouteService) {
-				return RouteService.getRoute;
 			}
 		}
 	})

@@ -19,17 +19,17 @@ i.small.ion-shuffle:before {
 }
 
 .align-left{
-	float: left
+	float: left;
 	text-align: left;
 }
 
 .align-center{
-	float: center
+	float: center;
 	text-align: center;
 }
 
 .width-80 {
-	width: 80%
+	width: 80%;
 }
 
 .align-right {

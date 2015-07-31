@@ -6,9 +6,9 @@
     </ion-nav-buttons>
 	<ion-content>
 		<div class="list">
-			<div ng-repeat="details in route.route">
+			<div ng-repeat="leg in route[0].legs">
 				<div>
-					{{details.start}}
+					{{leg.name}}
 				</div>
 				<div class="item">
 					{{details.duration.m}} min

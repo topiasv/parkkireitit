@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
 	//});
 })
 
-.controller('HomeCtrl', function($scope, $state, $ionicModal, favoriteRoutes, favoritePlaces, places, setFrom, setTo, setVia, getFrom, getVia, getTo, routes, transformIcon) {
+.controller('HomeCtrl', function($scope, $state, $ionicModal, favoriteRoutes, favoritePlaces, places, setFrom, setTo, setVia, getFrom, getVia, getTo, routes) {
 	$scope.favoriteRoutes = favoriteRoutes;
 	$scope.favoritePlaces = favoritePlaces;
 	$scope.places = places;
@@ -19,6 +19,8 @@ angular.module('starter.controllers', [])
 	$scope.setVia = setVia;
 	$scope.from = getFrom();
 	$scope.via = getVia();
+	$scope.viaExpand = false;
+	$scope.viaExpandBtn = "ion-plus";
 	$scope.to = getTo();
 	$scope.routes = routes;
 	
@@ -62,14 +64,46 @@ angular.module('starter.controllers', [])
 		$scope.to = getTo();
 	};
 	
+	$scope.applyVia = function(via) {
+		$scope.setVia(via);
+		$scope.closeModal();
+		$scope.via = getVia();
+	};
+	
 	$scope.applyFrom = function(from) {
 		$scope.setFrom(from);
 		$scope.closeModal();
 		$scope.from = getFrom();
 	};
 	
+	$scope.swapFromTo = function() {
+		$scope.setFrom($scope.to);
+		$scope.setTo($scope.from);
+		$scope.from = getFrom();
+		$scope.to = getTo();
+	};
 	
-	$scope.transformIcon = transformIcon;
+	$scope.toggleVia = function() {
+		if ($scope.viaExpand === false) {
+			$scope.viaExpand = true;
+			$scope.viaExpandBtn = "ion-minus";
+		} else {
+			$scope.viaExpand = false;
+			$scope.viaExpandBtn = "ion-plus";
+		}
+	}
+	
+	$scope.transformIcon = function(source) {
+		if (source === 'car') {
+			return 'ion-android-car';
+		} else if (source === '1' || source === '3' || source === '4' || source === '5' || source === '8' || source === '22' || source === '25' || source === '36' || source === '39') {
+			return 'ion-android-bus';
+		} else if (source === 'parking') {
+			return 'ion-social-hackernews-outline';
+		} else if (source === 'walk') {
+			return 'ion-android-walk';
+		}
+	}
 })
 
 .controller('FavoritesCtrl', function($scope, favoriteRoutes, favoritePlaces, addRoute, addPlace) {
@@ -79,7 +113,6 @@ angular.module('starter.controllers', [])
 	$scope.addPlace = addPlace;
 })
 
-.controller('DetailsCtrl', function($scope, $stateParams, getRoute) {
-	$scope.getRoute = getRoute;
-	$scope.route = getRoute($stateParams.routeId);
+.controller('DetailsCtrl', function($scope, $stateParams) {
+	$scope.route = $stateParams.route;
 })

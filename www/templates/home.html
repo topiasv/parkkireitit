@@ -1,6 +1,6 @@
 <ion-view view-title="Home">
     <ion-nav-buttons side="secondary">
-      <button class="button button-icon" ng-click="applyFrom(); applyTo()">
+      <button class="button button-icon" ng-click="applyFrom(); applyTo(); applyVia()">
         <i class="icon ion-close"></i>
       </button>
     </ion-nav-buttons>
@@ -8,7 +8,7 @@
 		<div class="list card">
 			<div class="item row">
 				<div class="col col-10 col-center">
-					<a href="" class="button button-clear button-dark icon-left ion-plus" ng-click="toggleVia()">
+					<a href="" class="button button-clear button-dark icon-left {{viaExpandBtn}}" ng-click="toggleVia()">
 						<!-- <i class="icon ion-plus small"></i> -->
 					</a>
 				</div>
@@ -16,6 +16,9 @@
 					<form>
 						<label class="item item-input" ng-click="openModal('Choose a starting point', applyFrom)">
 							<span ng-hide="from">From</span>{{from}}
+						</label>
+						<label class="item item-input" ng-click="openModal('Choose a via point', applyVia)" ng-show="viaExpand">
+							<span ng-hide="via">Via</span>{{via}}
 						</label>
 						<label class="item item-input" ng-click="openModal('Choose an ending point', applyTo)">
 							<span ng-hide="to">To</span>{{to}}
@@ -42,16 +45,19 @@
 			</a>
 		</div>
 		<div class="list card" ng-show="from && to">
-			<a href="#/app/home/details/{{route.id}}" class="item" ng-repeat="route in routes">
+			<a href="#/app/home/details/{{route[0]}}" class="item" ng-repeat="route in routes">
 				<div class="row">
 					<div class="col">
-						<i class="icon {{transformIcon(details.transport)}} larger padding-right"  ng-repeat="details in route.route">
-							<span class="small">{{details.details}}</span>
-						</i>
-						<h2>{{route.start.h}}:{{route.start.m}} - {{route.end.h}}:{{route.end.m}}</h2>
+						<span ng-repeat="leg in route[0].legs">
+							<i class="icon {{transformIcon(leg.type)}} larger padding-right">
+								<span class="small">{{leg.code}}</span>
+							</i>
+							<i class="icon ion-chevron-right larger padding-right" ng-hide="leg == route[0].legs[route[0].legs.length-1]"></i>
+						</span>
+						<h2>{{route[0].legs[0].locs[0].arrTime.substring(8,10)}}:{{route[0].legs[0].locs[0].arrTime.substring(10,12)}} - {{route[0].legs[route[0].legs.length-1].locs[route[0].legs[route[0].legs.length-1].locs.length-1].arrTime.substring(8,10)}}:{{route[0].legs[route[0].legs.length-1].locs[route[0].legs[route[0].legs.length-1].locs.length-1].arrTime.substring(10,12)}}</h2>
 						<p>via {{route.via}}</p>
 					</div>
-					<h2 class="col-center">{{route.duration.h}}:{{route.duration.m}}</h2>
+					<h2 class="col-center">{{route[0].duration/60}} min</h2>
 				</div>
 			</a>
 		</div>

@@ -12,14 +12,14 @@
 		<a class="item item-icon-left" ng-repeat="favorite in favoritePlaces" ng-click="callback(favorite.name)">
 			<i class="icon ion-ios-star"></i>
 			<h2>{{favorite.name}}</h2>
-			<p>{{favorite.commune}}</p>
+			<p>{{favorite.city}}</p>
 		</a>
 	</div>
 	<div class="list card" ng-hide="!searchInput">
 		<a class="item item-icon-left" ng-repeat="place in places | filter:searchInput" ng-click="callback(place.name)">
 			<i class="icon ion-ios-location"></i>
 			<h2>{{place.name}}</h2>
-			<p>{{place.commune}}</p>
+			<p>{{place.city}}</p>
 		</a>
 	</div>
 </ion-modal-view>
