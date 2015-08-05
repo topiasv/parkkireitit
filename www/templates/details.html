@@ -11,7 +11,7 @@
 					<div class="bold align-left">
 						{{leg.locs[0].arrTime.substring(8,10)}}:{{leg.locs[0].arrTime.substring(10,12)}}
 					</div>
-					<div class="left-15">
+					<div class="indent-4">
 						{{from}}
 					</div>
 				</div>
@@ -19,7 +19,7 @@
 					<div class="bold align-left">
 						{{leg.locs[0].arrTime.substring(8,10)}}:{{leg.locs[0].arrTime.substring(10,12)}}
 					</div>
-					<div class="left-15">
+					<div class="indent-4">
 						{{leg.locs[0].name}}
 					</div>
 				</div>
@@ -32,18 +32,18 @@
 							{{floatToInt((leg.duration / 60) % 60)}} min
 						</div>
 					</div>
-					<div class="left-15" style="width: 200px; height: 100px">
+					<div class="indent-4 align-left">
 						<i class="icon {{transformIcon(leg.type)}} big-icon"></i>
 					</div>
-					<div style="padding-left: 23%">
-							{{legDetails(leg)}}
+					<div class="indent-detail">
+						{{legDetails(leg)}}
 					</div>
 				</div>
 				<div ng-show="$last" class="item item-divider">
 					<div class="bold align-left">
 						{{leg.locs[leg.locs.length - 1].arrTime.substring(8,10)}}:{{leg.locs[leg.locs.length - 1].arrTime.substring(10,12)}}
 					</div>
-					<div class="left-15">
+					<div class="indent-4">
 						{{to}}
 					</div>
 				</div>
