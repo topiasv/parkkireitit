@@ -7674,3 +7674,43 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+i.small.ion-plus:before {
+  font-size: 25px; }
+
+i.small.ion-shuffle:before {
+  font-size: 25px; }
+
+.larger {
+  font-size: larger; }
+
+.big-icon {
+  font-size: 25px; }
+
+.small {
+  font-size: small; }
+
+.bold {
+  font-weight: bold; }
+
+.left-15 {
+  position: absolute;
+  padding-left: 15%; }
+
+.v-align-middle {
+  vertical-align: middle; }
+
+.align-left {
+  float: left;
+  text-align: left; }
+
+.align-center {
+  float: center;
+  text-align: center; }
+
+.width-80 {
+  width: 80%; }
+
+.align-right {
+  float: right;
+  text-align: right; }

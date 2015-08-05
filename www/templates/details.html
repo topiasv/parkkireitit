@@ -1,21 +1,52 @@
 <ion-view view-title="Details">
     <ion-nav-buttons side="secondary">
-      <button class="button button-icon" ng-click="addRoute()">
+      <button class="button button-icon" ng-click="test()">
         <i class="icon ion-star"></i>
       </button>
     </ion-nav-buttons>
 	<ion-content>
 		<div class="list">
 			<div ng-repeat="leg in route[0].legs">
-				<div>
-					{{leg.name}}
+				<div ng-show="$first" class="item item-divider">
+					<div class="bold align-left">
+						{{leg.locs[0].arrTime.substring(8,10)}}:{{leg.locs[0].arrTime.substring(10,12)}}
+					</div>
+					<div class="left-15">
+						{{from}}
+					</div>
+				</div>
+				<div class="item item-divider" ng-hide="leg.locs[0].name === null">
+					<div class="bold align-left">
+						{{leg.locs[0].arrTime.substring(8,10)}}:{{leg.locs[0].arrTime.substring(10,12)}}
+					</div>
+					<div class="left-15">
+						{{leg.locs[0].name}}
+					</div>
 				</div>
 				<div class="item">
-					{{details.duration.m}} min
+					<div class="align-left">
+						<div ng-hide="(leg.duration / 3600) < 1">
+							{{floatToInt(leg.duration / 3600)}} h 
+						</div>
+						<div>
+							{{floatToInt((leg.duration / 60) % 60)}} min
+						</div>
+					</div>
+					<div class="left-15" style="width: 200px; height: 100px">
+						<i class="icon {{transformIcon(leg.type)}} big-icon"></i>
+					</div>
+					<div style="padding-left: 23%">
+							{{legDetails(leg)}}
+					</div>
 				</div>
-			</div>
-			<div>
-				{{route.route[route.route.length - 1].end}}
+				<div ng-show="$last" class="item item-divider">
+					<div class="bold align-left">
+						{{leg.locs[leg.locs.length - 1].arrTime.substring(8,10)}}:{{leg.locs[leg.locs.length - 1].arrTime.substring(10,12)}}
+					</div>
+					<div class="left-15">
+						{{to}}
+					</div>
+				</div>
 			</div>
 		</div>
 	</ion-content>

@@ -10,7 +10,8 @@ angular.module('starter.controllers', [])
 	//});
 })
 
-.controller('HomeCtrl', function($scope, $state, $ionicModal, favoriteRoutes, favoritePlaces, places, setFrom, setTo, setVia, getFrom, getVia, getTo, routes) {
+.controller('HomeCtrl', function($scope, $state, $ionicModal, SelRouteService, favoriteRoutes, favoritePlaces, places, setFrom, setTo, setVia, getFrom, getVia, getTo, routes, getLine, transformIcon) {
+	$scope.SelRouteService = SelRouteService;
 	$scope.favoriteRoutes = favoriteRoutes;
 	$scope.favoritePlaces = favoritePlaces;
 	$scope.places = places;
@@ -23,6 +24,7 @@ angular.module('starter.controllers', [])
 	$scope.viaExpandBtn = "ion-plus";
 	$scope.to = getTo();
 	$scope.routes = routes;
+	$scope.getLine = getLine;
 	
 	$ionicModal.fromTemplateUrl('templates/search.html', {
 		scope: $scope,
@@ -93,17 +95,11 @@ angular.module('starter.controllers', [])
 		}
 	}
 	
-	$scope.transformIcon = function(source) {
-		if (source === 'car') {
-			return 'ion-android-car';
-		} else if (source === '1' || source === '3' || source === '4' || source === '5' || source === '8' || source === '22' || source === '25' || source === '36' || source === '39') {
-			return 'ion-android-bus';
-		} else if (source === 'parking') {
-			return 'ion-social-hackernews-outline';
-		} else if (source === 'walk') {
-			return 'ion-android-walk';
-		}
+	$scope.selectRoute = function(route) {
+		SelRouteService = route;
 	}
+	
+	$scope.transformIcon = transformIcon;
 })
 
 .controller('FavoritesCtrl', function($scope, favoriteRoutes, favoritePlaces, addRoute, addPlace) {
@@ -113,6 +109,39 @@ angular.module('starter.controllers', [])
 	$scope.addPlace = addPlace;
 })
 
-.controller('DetailsCtrl', function($scope, $stateParams) {
-	$scope.route = $stateParams.route;
+.controller('DetailsCtrl', function($scope, $stateParams, getRoute, getPlace, transformIcon) {
+	$scope.routeIndex = $stateParams.routeIndex;
+	$scope.getRoute = getRoute;
+	$scope.route = getRoute($stateParams.routeIndex);
+	$scope.getPlace = getPlace;
+	$scope.from = $stateParams.from;
+	$scope.to = $stateParams.to;
+	
+	$scope.transformCoords = function(coord) {
+		console.log(coord.x + "," + coord.y);
+		return coord.x + "," + coord.y;
+	}
+	
+	$scope.test = function() {
+		console.log(from);
+		alert(from);
+	}
+	
+	$scope.floatToInt = function(value) {
+		return value | 0;
+	}
+	
+	$scope.transformIcon = transformIcon;
+	
+	$scope.legDetails = function(leg) {
+		if (leg.type === "walk") {
+			return "Walk " + leg.length / 1000 + " km";
+		} else {
+			if (leg.locs.length - 1 < 2) {
+				return "Ride " + leg.locs.length + " stop";
+			} else {
+				return "Ride " + leg.locs.length + " stops";
+			}
+		}
+	};
 })

@@ -45,8 +45,8 @@ angular.module('starter', ['ionic', 'ionic.utils', 'starter.controllers', 'start
 			favoritePlaces: function(FavoritesService) {
 				return FavoritesService.getPlaces();
 			},
-			places: function(PlacesService) {
-				return PlacesService.getPlaces();
+			places: function(GeocodeService) {
+				return GeocodeService.getPlaces();
 			},
 			setFrom: function(QueryService) {
 				return QueryService.setFrom;
@@ -68,16 +68,33 @@ angular.module('starter', ['ionic', 'ionic.utils', 'starter.controllers', 'start
 			},
 			routes: function(RouteService) {
 				return RouteService.getRoutes();
+			},
+			getLine: function(LineService) {
+				return LineService.getLine;
+			},
+			transformIcon: function(RouteService) {
+				return RouteService.transformIcon;
 			}
 		}
 	})
 
 	.state('app.details', {
-		url: "/home/details/:route",
+		url: "/home/details/:from/:to/:routeIndex",
 		views: {
 			'menuContent': {
 				templateUrl: "templates/details.html",
 				controller: 'DetailsCtrl'
+			}
+		},
+		resolve: {
+			getRoute: function(RouteService) {
+				return RouteService.getRoute;
+			},
+			getPlace: function(ReverseGeocodeService) {
+				return ReverseGeocodeService.getPlace;
+			},
+			transformIcon: function(RouteService) {
+				return RouteService.transformIcon;
 			}
 		}
 	})

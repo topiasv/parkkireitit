@@ -45,12 +45,12 @@
 			</a>
 		</div>
 		<div class="list card" ng-show="from && to">
-			<a href="#/app/home/details/{{route[0]}}" class="item" ng-repeat="route in routes">
+			<a href="#/app/home/details/{{from}}/{{to}}/{{$index}}" class="item" ng-repeat="route in routes">
 				<div class="row">
 					<div class="col">
 						<span ng-repeat="leg in route[0].legs">
 							<i class="icon {{transformIcon(leg.type)}} larger padding-right">
-								<span class="small">{{leg.code}}</span>
+								<span class="small">{{getLine(leg.code)[0].code_short}}</span>
 							</i>
 							<i class="icon ion-chevron-right larger padding-right" ng-hide="leg == route[0].legs[route[0].legs.length-1]"></i>
 						</span>
